@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body>
+    <section id="page">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-xl-8">
+                    <h1 class="display-6">Vôlei Software</h1>
+                    <div id="register">
+                        <form id="register-form">
+                            <h2 class="fs-4 display-1 mb-3">Cadastro de partida</h2>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="team1" id="team1" placeholder="Equipe A" required>
+                                <label for="team1">Equipe A</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="team2" id="team2" placeholder="Equipe B" required>
+                                <label for="team2">Equipe B</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" name="time" id="time" placeholder="Horário" required>
+                                <label for="time">Horário</label>
+                            </div>
+                            <button id="btn-register" class="btn btn-primary">Cadastrar</button>
+                        </form>
+                    </div>
+                    <div id="game" style="display: none">
+                        <div class="row">
+                            <h2 class="fs-4 mb-5 text-success">O jogo começou!</h2>
+                            <h3 class="mb-4">Set atual: <span id="actual-set"></span></h3>
+                            <div class="col-6">
+                                <h2 class="fs-4 display-1 mb-3">Equipe A: <span id="team1d"></span></h2>
+                                <div id="team1-score" class="display-1">0</div>
+                                <button id="btn-team1-add" data-team="1" class="btn btn-success bt-action-plus">+</button>
+                                <button id="btn-team1-sub" data-team="1" class="btn btn-danger bt-action-less">-</button>
+                            </div>
+                            <div class="col-6">
+                                <h2 class="fs-4 display-1 mb-3">Equipe B: <span id="team2d"></span></h2>
+                                <div id="team2-score" class="display-1">0</div>
+                                <button id="btn-team2-add" data-team="2" class="btn btn-success bt-action-plus">+</button>
+                                <button id="btn-team2-sub" data-team="2" class="btn btn-danger bt-action-less">-</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="sets" class="mt-5" style="display: none">
+                        <div class="alert alert-success" role="alert">
+                            Equipe A (<span id="setTeam1Name"></span>) ganhou <strong><span id="setsWinTeam1">0</span></strong> sets
+                        </div>
+                        <div class="alert alert-info" role="alert">
+                            Equipe B (<span id="setTeam2Name"></span>) ganhou <strong><span id="setsWinTeam2">0</span></strong> sets
+                        </div>
+                    </div>
+                    <div id="winner" style="display: none">
+                        <h2 class="fs-4 mt-5 mb-3 text-success">O jogo acabou!</h2>
+                        <h3 class="mb-4">O vencedor é: <span id="winner-team"></span></h3>
+                        <!-- refresh page -->
+                        <button onclick="window.location.reload()" class="btn btn-outline-secondary">Iniciar nova partida</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modalSet" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p class="text-center">O Set acabou.</p>
+            </div>
+            <div class="modal-footer border-top-0">
+            <!-- <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Realizar alterações</button> -->
+            <button id="btn-seguir-set" type="button" class="btn btn-success" data-bs-dismiss="modal">Prosseguir para o próximo set</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div id="modalOver" class="modal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-bottom-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <p class="text-center">O jogo acabou.</p>
+            </div>
+            <div class="modal-footer border-top-0">
+            <button id="btn-seguir-set" type="button" class="btn btn-success" data-bs-dismiss="modal">Ver resultado</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script>
+        const modalSet = new bootstrap.Modal('#modalSet', [true, true, true]);
+        const modalOver = new bootstrap.Modal('#modalOver', [true, true, true]);
+    </script>
+    <script defer src="util.js"></script>
+    <script defer src="classes.js"></script>
+    <script defer src="app.js"></script>
+
+</body>
+</html>
